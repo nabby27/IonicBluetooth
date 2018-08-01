@@ -17,13 +17,13 @@ Access to App folder and run comand:
 
 * Desktop browser testing  
 ```sh
-ionic serve
+$ ionic serve
 ```
 
 * Run in Android (you have to enable USB debugging and USB for file transfer)
 ```sh
-ionic build android
-ionic cordova run android
+$ ionic build android
+$ ionic cordova run android
 ```
 
 ## Authors
