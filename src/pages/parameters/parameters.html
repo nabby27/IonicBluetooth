@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Parameters
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!--FIRST PARAMETER-->
+  {{isTakePhoto}} - {{leftPhotos}} - {{firstStep}} - {{secondStep}} - {{thirdStep}}
+  <ion-item>
+    <ion-label>Time to the first photo (sec)
+      <ion-badge item-end>{{timeFirstPhoto}}</ion-badge>
+    </ion-label>
+    <ion-range min="0" max="60" [(ngModel)]="timeFirstPhoto" debounce="500" step="5" snaps="true" (ionChange)="syncData()"
+      disabled="{{isTakePhoto}}">
+      <ion-icon class="fas fa-hourglass-start" range-left big></ion-icon>
+      <ion-spinner name="crescent" *ngIf="firstStep" range-right></ion-spinner>
+    </ion-range>
+  </ion-item>
+  <!--SECOND PARAMETER-->
+  <ion-item>
+    <ion-label>Duration of the photo (sec)
+      <ion-badge item-end>{{durationPhoto}}</ion-badge>
+    </ion-label>
+    <ion-range min="1" max="60" [(ngModel)]="durationPhoto" debounce="500" (ionChange)="syncData()" disabled="{{isTakePhoto}}">
+      <ion-icon class="fas fa-hourglass-half" range-left big></ion-icon>
+      <ion-spinner name="crescent" *ngIf="secondStep" range-right></ion-spinner>
+    </ion-range>
+  </ion-item>
+  <!--THIRD PARAMETER-->
+  <ion-item>
+    <ion-label>Time between photos (sec)
+      <ion-badge item-end>{{timeBetweenPhotos}}</ion-badge>
+    </ion-label>
+    <ion-range min="1" max="60" [(ngModel)]="timeBetweenPhotos" debounce="500" (ionChange)="syncData()" disabled="{{isTakePhoto}}">
+      <ion-icon class="far fa-clock" range-left big></ion-icon>
+      <ion-spinner name="crescent" *ngIf="thirdStep" range-right></ion-spinner>
+    </ion-range>
+  </ion-item>
+  <!--FOURTH PARAMETER-->
+  <ion-item>
+    <ion-label *ngIf="!isTakePhoto">How many photos
+      <ion-badge item-end>{{howManyPhotos}}</ion-badge>
+    </ion-label>
+    <ion-label *ngIf="isTakePhoto">Photos to finish:
+      <ion-badge item-end>{{leftPhotos}}/{{howManyPhotos}}</ion-badge>
+    </ion-label>
+    <ion-range min="1" max="250" [(ngModel)]="howManyPhotos" debounce="500" (ionChange)="syncData()" disabled="{{isTakePhoto}}">
+      <ion-icon name="images" range-left big></ion-icon>
+    </ion-range>
+  </ion-item>
+  <!--BUTTONS-->
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="!isTakePhoto">
+        <button ion-button icon-start block (click)="sendData()">
+          <ion-icon name='camera'></ion-icon>
+          TAKE PHOTO
+        </button>
+      </ion-col>
+      <ion-col *ngIf="isTakePhoto">
+        <button ion-button icon-start block color="danger" (click)="stop()">
+          <ion-icon name='square'></ion-icon>
+          STOP
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>

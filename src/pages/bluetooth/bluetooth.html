@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Bluetooth
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="startScanning()">Scan</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block (click)="disconnect()">Disconnect device</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--<ion-list-header>
+    <strong>PAIRED DEVICES</strong>
+  </ion-list-header>
+  <ion-item *ngFor="let device of pairedDevices" (click)="selectDevice(device)">
+    {{device.name}}
+  </ion-item>-->
+  <ion-list-header>
+    <strong>Available Devices</strong>
+  </ion-list-header>
+  <ion-item *ngFor='let device of unpairedDevices' (click)="selectDevice(device)">
+    {{device.name}}
+  </ion-item>
+  <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+</ion-content>
